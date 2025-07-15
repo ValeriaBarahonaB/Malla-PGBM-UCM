@@ -1,4 +1,112 @@
-const cursos = {
+const estructura = [
+  {
+    titulo: "Primer año - I semestre",
+    cursos: [
+      "Construcción del Ser Docente y Rol Pedagógico",
+      "Historia de la Educación en Chile y Políticas Públicas",
+      "Lenguaje y Comunicación",
+      "Números y Operaciones en Primaria",
+      "Fundamentos de la Historia Occidental",
+      "Taller Pedagógico I"
+    ]
+  },
+  {
+    titulo: "Primer año - II semestre",
+    cursos: [
+      "Diversidad y Convivencia Escolar",
+      "Psicología del Desarrollo Humano",
+      "Gramática y Ortografía para la Formación Escolar",
+      "Elementos de Geometría y Medición",
+      "Ciencias de la Vida",
+      "Taller Pedagógico II",
+      "Inglés I"
+    ]
+  },
+  {
+    titulo: "Segundo año - III semestre",
+    cursos: [
+      "Teoría del Aprendizaje y su Relación con el Desarrollo Humano",
+      "Literatura y Teatro para Niños",
+      "Álgebra, Patrones y su Didáctica",
+      "Historia de América y Chile",
+      "Ciencias Físicas y Químicas",
+      "Taller Pedagógico III"
+    ]
+  },
+  {
+    titulo: "Segundo año - IV semestre",
+    cursos: [
+      "Orientación Educacional",
+      "Lectura y Escritura Inicial",
+      "Enseñanza de Elementos de Estadística y Probabilidades",
+      "Geografía y Formación Ciudadana",
+      "Ciencias de la Tierra y el Universo",
+      "Taller Pedagógico IV",
+      "Inglés II"
+    ]
+  },
+  {
+    titulo: "Tercer año - V semestre",
+    cursos: [
+      "Diseño y Planificación Curricular para Educación Básica",
+      "Gestión Escolar",
+      "Didáctica de la Lectura Comprensiva y la Escritura",
+      "Didáctica de los Números y la Geometría",
+      "Taller Pedagógico V",
+      "Introducción a la Fe"
+    ]
+  },
+  {
+    titulo: "Tercer año - VI semestre",
+    cursos: [
+      "Evaluación de los Aprendizajes en Educación Básica",
+      "Metodologías de Investigación",
+      "Didáctica de la Historia, la Geografía y Ciencias Sociales",
+      "Didáctica e Historia de las Ciencias Naturales",
+      "Taller Pedagógico VI",
+      "Ética Cristiana"
+    ]
+  },
+  {
+    titulo: "Cuarto año - VII semestre",
+    cursos: [
+      "Investigación Acción en la Escuela",
+      "Las Funciones en el Álgebra de Primaria",
+      "Sistema Numéricos y sus Fundamentos Teóricos",
+      "Taller Pedagógico VII",
+      "Certificación I"
+    ]
+  },
+  {
+    titulo: "Cuarto año - VIII semestre",
+    cursos: [
+      "Síntesis de Grado en Educación",
+      "Profundización en Estadística y Probabilidad en Primaria",
+      "Geometría Plana y del Espacio",
+      "Taller Pedagógico VIII",
+      "Certificación II"
+    ]
+  },
+  {
+    titulo: "Quinto año - IX semestre",
+    cursos: [
+      "Enseñanza del Álgebra y Sistemas Numéricos",
+      "Enseñanza de la Geometría",
+      "Enseñanza de la Estadística y la Probabilidad",
+      "Las Artes como Estrategias Educativas",
+      "Taller Pedagógico IX",
+      "Certificación III"
+    ]
+  },
+  {
+    titulo: "Quinto año - X semestre",
+    cursos: [
+      "Práctica Profesional"
+    ]
+  }
+];
+
+const dependencias = {
   "Construcción del Ser Docente y Rol Pedagógico": ["Psicología del Desarrollo Humano"],
   "Historia de la Educación en Chile y Políticas Públicas": ["Diversidad y Convivencia Escolar"],
   "Lenguaje y Comunicación": ["Gramática y Ortografía para la Formación Escolar"],
@@ -59,35 +167,33 @@ const cursos = {
 };
 
 const estadoCursos = {};
-
 const mallaDiv = document.getElementById("malla");
 
-function crearBoton(curso) {
-  const btn = document.createElement("div");
-  btn.classList.add("curso");
-  btn.innerText = curso;
-  btn.dataset.nombre = curso;
+function tieneRequisitoBloqueado(curso) {
+  return Object.entries(dependencias).some(([requisito, desbloquea]) =>
+    desbloquea.includes(curso) && !estadoCursos[requisito]
+  );
+}
 
-  if (tieneRequisitoBloqueado(curso)) {
-    btn.classList.add("bloqueado");
+function crearCursoElemento(nombre) {
+  const div = document.createElement("div");
+  div.classList.add("curso");
+  div.innerText = nombre;
+  div.dataset.nombre = nombre;
+
+  if (tieneRequisitoBloqueado(nombre)) {
+    div.classList.add("bloqueado");
   }
 
-  btn.addEventListener("click", () => {
-    if (btn.classList.contains("bloqueado")) return;
+  div.addEventListener("click", () => {
+    if (div.classList.contains("bloqueado")) return;
 
-    btn.classList.toggle("aprobado");
-    estadoCursos[curso] = !estadoCursos[curso];
-
+    div.classList.toggle("aprobado");
+    estadoCursos[nombre] = !estadoCursos[nombre];
     actualizarBloqueos();
   });
 
-  mallaDiv.appendChild(btn);
-}
-
-function tieneRequisitoBloqueado(curso) {
-  return Object.entries(cursos).some(([requisito, desbloquea]) =>
-    desbloquea.includes(curso) && !estadoCursos[requisito]
-  );
+  return div;
 }
 
 function actualizarBloqueos() {
@@ -103,15 +209,25 @@ function actualizarBloqueos() {
   });
 }
 
-// Inicializa
-const todosLosCursos = new Set([
-  ...Object.keys(cursos),
-  ...Object.values(cursos).flat()
-]);
+// Crear visualización ordenada
+estructura.forEach(bloque => {
+  const titulo = document.createElement("h2");
+  titulo.textContent = bloque.titulo;
+  mallaDiv.appendChild(titulo);
 
-todosLosCursos.forEach(curso => {
-  estadoCursos[curso] = false;
-  crearBoton(curso);
+  const contenedor = document.createElement("div");
+  contenedor.classList.add("bloque");
+  contenedor.style.display = "flex";
+  contenedor.style.flexWrap = "wrap";
+  contenedor.style.gap = "1rem";
+  mallaDiv.appendChild(contenedor);
+
+  bloque.cursos.forEach(nombre => {
+    estadoCursos[nombre] = false;
+    const elemento = crearCursoElemento(nombre);
+    contenedor.appendChild(elemento);
+  });
 });
 
 actualizarBloqueos();
+
