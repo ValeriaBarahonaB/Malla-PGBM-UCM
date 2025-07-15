@@ -6,10 +6,15 @@ body {
   background-color: #ffe6f0;
   overflow: hidden;
   height: 100vh;
+  width: 100vw;
+  position: relative;
 }
 
 #container {
-  transform: scale(0.5); 
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(0.5); /* 👈 Cambia este valor si necesitas más/menos zoom */
   transform-origin: top left;
   width: max-content;
   height: max-content;
@@ -17,7 +22,7 @@ body {
 
 #malla {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr); /* 🔟 10 semestres como columnas */
   grid-auto-rows: auto;
   gap: 0.5rem;
   padding: 1rem;
@@ -28,16 +33,16 @@ body {
   background-color: #fff0f5;
   border: 1px solid #ffb6c1;
   border-radius: 12px;
-  padding: 0.4rem;
+  padding: 0.3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   overflow: hidden;
 }
 
 h2 {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   margin: 0.2rem 0;
   text-align: center;
   color: #d6336c;
@@ -47,12 +52,12 @@ h2 {
   background-color: #ffc0cb;
   border: 1px solid #ff69b4;
   border-radius: 8px;
-  padding: 0.25rem;
-  margin: 0.15rem 0;
+  padding: 0.2rem;
+  margin: 0.1rem 0;
   cursor: pointer;
   text-align: center;
   width: 100%;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .curso.aprobado {
@@ -66,3 +71,4 @@ h2 {
   cursor: not-allowed;
   opacity: 0.6;
 }
+
