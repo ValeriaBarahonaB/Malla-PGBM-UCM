@@ -1,74 +1,48 @@
-/* style.css */
-
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #ffe6f0;
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
-  position: relative;
+  background-color: #fff0f5;
+  margin: 0;
+  padding: 2rem;
+  color: #333;
 }
 
-#container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: scale(0.5); /* 👈 Cambia este valor si necesitas más/menos zoom */
-  transform-origin: top left;
-  width: max-content;
-  height: max-content;
+h1 {
+  text-align: center;
+  color: #d63384;
 }
 
 #malla {
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* 🔟 10 semestres como columnas */
-  grid-auto-rows: auto;
-  gap: 0.5rem;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-.bloque {
-  background-color: #fff0f5;
-  border: 1px solid #ffb6c1;
-  border-radius: 12px;
-  padding: 0.3rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 0.65rem;
-  overflow: hidden;
-}
-
-h2 {
-  font-size: 0.75rem;
-  margin: 0.2rem 0;
-  text-align: center;
-  color: #d6336c;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .curso {
   background-color: #ffc0cb;
-  border: 1px solid #ff69b4;
-  border-radius: 8px;
-  padding: 0.2rem;
-  margin: 0.1rem 0;
+  border: 2px solid #d63384;
+  border-radius: 10px;
+  padding: 1rem;
   cursor: pointer;
+  transition: transform 0.2s;
   text-align: center;
-  width: 100%;
-  font-size: 0.6rem;
+  font-weight: bold;
 }
 
-.curso.aprobado {
-  background-color: #c8e6c9;
-  border-color: #66bb6a;
+.curso:hover {
+  transform: scale(1.05);
 }
 
 .curso.bloqueado {
   background-color: #f8d7da;
-  border-color: #f5c6cb;
+  color: #aaa;
   cursor: not-allowed;
-  opacity: 0.6;
+  border-color: #e0aeb0;
+}
+
+.curso.aprobado {
+  background-color: #ff69b4;
+  color: white;
+  text-decoration: line-through;
 }
 
