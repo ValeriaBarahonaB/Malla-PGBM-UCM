@@ -1,18 +1,26 @@
+/* style.css */
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #ffe6f0; /* fondo rosa claro */
-  overflow: hidden; /* oculta scroll */
+  background-color: #ffe6f0;
+  overflow: hidden;
   height: 100vh;
+}
+
+#container {
+  transform: scale(0.6); /* 🔍 Cambia a 0.5 o 0.7 si quieres más o menos zoom */
+  transform-origin: top left;
+  width: max-content;
+  height: max-content;
 }
 
 #malla {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 columnas: dos semestres por año */
-  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(10, 1fr); /* 🔟 10 semestres como columnas */
+  grid-auto-rows: auto;
   gap: 0.5rem;
-  padding: 0.5rem;
-  height: 100%;
+  padding: 1rem;
   box-sizing: border-box;
 }
 
@@ -29,7 +37,7 @@ body {
 }
 
 h2 {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   margin: 0.2rem 0;
   text-align: center;
   color: #d6336c;
