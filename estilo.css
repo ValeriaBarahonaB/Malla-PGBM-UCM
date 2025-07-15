@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff0f5;
+  margin: 0;
+  padding: 2rem;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #d63384;
+}
+
+#malla {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.curso {
+  background-color: #ffc0cb;
+  border: 2px solid #d63384;
+  border-radius: 10px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  text-align: center;
+  font-weight: bold;
+}
+
+.curso:hover {
+  transform: scale(1.05);
+}
+
+.curso.bloqueado {
+  background-color: #f8d7da;
+  color: #aaa;
+  cursor: not-allowed;
+  border-color: #e0aeb0;
+}
+
+.curso.aprobado {
+  background-color: #ff69b4;
+  color: white;
+  text-decoration: line-through;
+}
