@@ -9,7 +9,7 @@ body {
 }
 
 #container {
-  transform: scale(0.6); /* 🔍 Cambia a 0.5 o 0.7 si quieres más o menos zoom */
+  transform: scale(0.5); 
   transform-origin: top left;
   width: max-content;
   height: max-content;
@@ -17,7 +17,7 @@ body {
 
 #malla {
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* 🔟 10 semestres como columnas */
+  grid-template-columns: repeat(10, 1fr);
   grid-auto-rows: auto;
   gap: 0.5rem;
   padding: 1rem;
